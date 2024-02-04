@@ -123,10 +123,64 @@ flowchart LR
    O ---> ON(MySQL Limit Data)
 
    A ---> P((What Next?))
-   P ---> PA(Laravel)
+   P ---> PA(Projects)
+   P ---> PB(Laravel)
 ```
 Free Resource Links  ---[⬆️](#php-laravel)---
 |Resource|Links|
 |---|---|
 |PHP|[link](https://www.php.net/)|
 |Laravel|[link](https://laravel.com/)|
+
+## Laravel Roadmap
+
+
+```mermaid
+flowchart RL
+    A((LARAVEL)) --> B((Installation and Setup))
+    B --> BA(XAMPP Installation)
+    B ---> BB(Composer Installation)
+    B ---> BC(Git Installation)
+    B ---> BC(First Laravel Project)
+    B ---> BD(Laravel Application Structure)
+
+    A ---> C((Routing))
+    C ---> CA(About Basic Routing)
+    C ---> CB(Routing Parameters)
+    C ---> CC(Named Routers)
+    C ---> CD(Middleware)
+    C ---> CE(Route Groups)
+
+    A ---> D((Controllers))
+    D ---> DA(Laravel Controllers)
+    D ---> DB(Routing Controlers)
+    D ---> DC(Resource Controllers)
+    D ---> DD(Controller Middleware)
+
+    A ---> E((Laravel Views))
+    E ---> EA(Laravel Views)
+    E ---> EB(Passing data to views)
+
+    A ---> F((Laravel Blade Template))
+    F ---> FA(Blade Template)
+    F ---> FB(Template Inheritance)
+    F ---> FC(laravel Forms)
+
+    A ---> G((Laravel Migration))
+    G ---> GA(Laravel Migration)
+    G ---> GB(Migration Structure)
+    G ---> GC(Generating Migration)
+    G ---> GD(Migration Commands)
+
+    A ---> H((Laravel Database))
+    H ---> HA(Laravel Database)
+    H ---> HB(Laravel Eloquent)
+    H ---> HC(Laravel Relationship)
+    H ---> HD(Laravel Tinker)
+    H ---> HE(Laravel CRUD)
+
+    A ---> I((What Next?))
+    I ---> IA(Projects)
+```
+
+GO-TO ---[⬆️](#php-laravel)---
