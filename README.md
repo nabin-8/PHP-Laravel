@@ -6,7 +6,7 @@
 ```mermaid
 flowchart LR
     A((PHP)) --> B((Installation and Setup))
-    B --> BA(XAMP)
+    B --> BA(XAMPP)
     B ---> BB(File Setup)
 
     A ---> C((Introduction to PHP))
@@ -87,8 +87,8 @@ flowchart LR
    L ---> LE(Append File)
    L ---> LF(Delete File)
 
-   A ---> M((Uploaf Download))
-   M ---> MA(File Upload)
+   A ---> M((Upload/Download))
+   M ---> MA(Upload File)
    M ---> MB(Download File)
 
    A ---> N((OOP))
@@ -125,7 +125,7 @@ flowchart LR
    A ---> P((What Next?))
    P ---> PA(Laravel)
 ```
-Free Resource Links
+Free Resource Links  ---[⬆️](#php-laravel)---
 |Resource|Links|
 |---|---|
 |PHP|[link](https://www.php.net/)|
