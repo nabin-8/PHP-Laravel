@@ -16,6 +16,7 @@ flowchart LR
     C ---> CD(Data Types)
     C ----> CE(Operators)
     C ---> CF(Comments)
+    C ---> CG(PHP Keywords)
 
    CE --->CEA(Arithmetic Operators)
    CE --->CEB(Assignmment Operators)
@@ -141,8 +142,8 @@ flowchart RL
     B --> BA(XAMPP Installation)
     B ---> BB(Composer Installation)
     B ---> BC(Git Installation)
-    B ---> BC(First Laravel Project)
-    B ---> BD(Laravel Application Structure)
+    B ---> BD(First Laravel Project)
+    B ---> BE(Laravel Application Structure)
 
     A ---> C((Routing))
     C ---> CA(About Basic Routing)
