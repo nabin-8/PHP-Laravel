@@ -1,6 +1,5 @@
 # PHP-Laravel
 
-
 ## PHP Roadmap
 
 ```mermaid
@@ -127,7 +126,8 @@ flowchart LR
    P ---> PA(Projects)
    P ---> PB(Laravel)
 ```
-Free Resource Links  ---[⬆️](#php-laravel)---
+
+Free Resource Links ---[⬆️](#php-laravel)---
 |Resource|Links|
 |---|---|
 |PHP|[link](https://www.php.net/)|
@@ -135,11 +135,10 @@ Free Resource Links  ---[⬆️](#php-laravel)---
 
 ## Laravel Roadmap
 
-
 ```mermaid
 flowchart RL
     A((LARAVEL)) --> B((Installation and Setup))
-    B --> BA(XAMPP Installation)
+    B --> BA(XAMPP / Laragon Installation)
     B ---> BB(Composer Installation)
     B ---> BC(Git Installation)
     B ---> BD(First Laravel Project)
