@@ -96,8 +96,28 @@
 - It may also have required logics.
 
 - It Works as a mediator between View and Model
-  |<p style="text-align:center; background-color:#dc2626; border-radius :4px; padding:5px;" >MVC ( Model View Controller )</P>|
+  |MVC ( Model View Controller )|
   |---|
-  |<img src="mvc.png" style="border-radius :8px; height:480px;width:510px; text-align:center;" />|
+  |![mvc](mvc.png)|
+
+#### Why use MVC
+
+- Organized Code
+- Independent Block
+- Reduce the complexity of the web applications
+- Easy to Maintain
+- Easy to modify
+
+#### Basic Stricture of MVC
+
+- Assets
+  - CSS
+  - Images
+  - JS
+- Config
+  - Database Config File
+- Controllers
+- Model
+- Views
 
 ##
