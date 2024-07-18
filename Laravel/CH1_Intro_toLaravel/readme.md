@@ -26,7 +26,7 @@
 
 ##### 4.Laragon/XAAMP
 
-##### 5.Laravel Herd
+##### 5.Laravel Herd (Recommended)
 
 ##### 6.Composer
 
