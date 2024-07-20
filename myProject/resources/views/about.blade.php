@@ -15,3 +15,28 @@
 @section('title')
     About
 @endsection
+
+@verbatim
+    <div id="app">{{ message }}</div>
+@endverbatim
+@push('scripts')
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
+
+    <script>
+        const {
+            createApp,
+            ref
+        } = Vue
+
+        createApp({
+            setup() {
+                const message = ref('Hello vue!')
+                return {
+                    message
+                }
+            }
+        }).mount('#app')
+    </script>
+@endpush

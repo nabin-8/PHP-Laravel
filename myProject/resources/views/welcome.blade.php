@@ -52,6 +52,7 @@
 @extends('layouts.masterlayout');
 
 @section('content')
+    <a href="{{ route('blog') }}">Blog</a>
     <h2>Home page</h2>
     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus veniam dolores possimus rem magnam alias nostrum
         perspiciatis sit! Nostrum neque necessitatibus quod illo nam unde corporis qui ratione repellat modi?</p>
@@ -60,3 +61,9 @@
 @section('title')
     Home
 @endsection
+
+@push('scripts')
+    <script src="/example.js"></script>
+    <script src="/example.js"></script>
+    <script src="/example.js"></script>
+@endpush

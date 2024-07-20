@@ -38,6 +38,8 @@
     <div class="footer">
         Code©copyright 2023.
     </div>
+
+    @stack('scripts')
 </body>
 
 </html>

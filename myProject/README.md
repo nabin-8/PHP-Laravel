@@ -1,6 +1,11 @@
 ## Laravel
+### TOC
+|No|Day|Total Topics|
+|---|---|---|
+|1|[day1](#day1)|10|
+|2|[day2](#day2)|7|
 #### Day1
-|Day1|Topics|
+|No|Topics|
 |---|---|
 |1|[laravel-introduction](#1laravel-introduction)|
 |2|Laravel setup Laravel `Herd`|
@@ -13,6 +18,7 @@
 |9|[Laravel Blade II](#9laravel-blade-template---ii)|
 |10|[Laravel Blade III](#10laravel-blade-template---iii)|
 ### 1.Laravel Introduction
+*
     - Laravel is a free, open-source and one of the
     more popular `PHP web Framework` based on `MVC` architectural pattern.
     - created by Taylor Otwell in june 2011
@@ -431,4 +437,353 @@
     @parent
     <p>This is appended to the sidebar</p>
 @endsection
+```
+
+#### Day2 
+[goto-toc⤴️](#toc)
+|No|Topics|
+|---|---|
+|11|[js in balde](#11blade-template---iv-js-in-blade)|
+|12|[data-passing](#12data-passing-route-to-view)|
+|13|[controller](#13controller-in-laravel)|
+|14|[features-of-laravel-11](#14features-of-laravel-11)|
+|15|[database-migration](#15database-migration)|
+|16|[migration-modifiers](#16migration-modifiers-and-constraints)|
+|17|[migration-primary-foreign-key](#17migration-primary--foreign-key)|
+
+### 11.Blade Template - IV JS in Blade
+*
+    - How to write js in blade template
+    ```php
+        @php
+            $user = 'Hello';
+            $frouts = ['Apple', 'Mango', 'Banana', 'Litchi'];
+        @endphp
+
+        <script>
+            // let data = @json($frouts);
+
+            let data = {{ Js::from($frouts) }}
+            data.map((val) => {
+                console.log(val);
+            })
+        </script>
+    ```
+    - Js in Template Inheritance
+    ```php
+        //define
+        @stack('script')
+
+        //use
+        @extends('layout')
+        @push('script')
+            <script src="/example.js"></script>
+        @endpush
+    ```
+    - style (CSS)
+    ```php
+        @push('style')
+            <link rel="stylesheet" href="css/bootstrap.css">
+        @endpush
+
+        @prepend (‘style’)
+            <style>
+                #wrapper{
+                    background: tan;
+
+                    }
+            </style>
+        @endprepend
+    ```
+    - javascript Framework (VueJs)
+    ```php
+        @verbatim
+            {{user}}
+        @endverbatim
+    ```
+    - use Vue.js in laravel
+    ```php
+        @verbatim
+            <div id="app">{{ message }}</div>
+        @endverbatim
+        @push('scripts')
+            <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+            <script>
+                const {
+                    createApp,
+                    ref
+                } = Vue
+
+                createApp({
+                    setup() {
+                        const message = ref('Hello vue!')
+                        return {
+                            message
+                        }
+                    }
+                }).mount('#app')
+            </script>
+        @endpush
+    ```
+### 12.Data Passing Route to View
+*
+    - Dynamic Data Passing
+    ```php
+        function getUsers()
+        {
+            return  [
+                1 => ['name' => 'Amitabh', 'phone' => '9123456789', 'city' => 'Goa'],
+                2 => ['name' => 'Salman', 'phone' => '9123456789', 'city' => 'Delhi'],
+                3 => ['name' => 'Sunny', 'phone' => "9123456789", 'city' => 'Mumbai'],
+                4 => ['name' => 'Akshay', 'phone' => '9123456789', 'city' => 'Agra'],
+            ];
+        }
+
+        Route::get('/users', function () {
+        $names = getUsers();
+            return view('users', [
+                'users' => $names,
+                'city' => 'Delhi'
+            ]);
+        });
+
+        Route::get('/user/{id}', function ($id) {
+
+            $users = getUsers();
+            abort_if(!isset($users[$id]), 404);
+            $user = $users[$id];
+            return view('user', ['id' => $user]);
+        })->name("view.user");
+    ```
+### 13.Controller in Laravel
+*
+    - To work on controller we should follow these three steps
+        1. Create Controller File
+            * To create Controller:
+            * `php artisan make:controller UserController`
+            * Then it will create: `UserController.php`
+        ```php
+        class UserController extends Controller
+        {
+            public function show()
+            { 
+                return view('user.profile');
+
+            } 
+
+        }
+        // then add it to route
+        use App\Http\Controllers\UserController;
+        Route::get('/user', [UserController::class, 'show']);
+        ```
+        1. Create Controller class
+        1. Create Route
+        ```php
+        PageController.php
+        <?php
+            namespace App\Http\Controllers;
+
+            use Illuminate\Http\Request;
+
+            class PageController extends Controller
+            {
+                public function showHome()
+                {
+                    return view("welcome");
+                }
+                public function showUser(string $id)
+                {
+                    // return view("user", ["id" => $id]);
+                    return view("user", compact("id"));
+                }
+                public function showBlog()
+                {
+                    return view("blog");
+                }
+            }
+
+        ```
+        ```php
+            web.php
+
+            Route::get("/", [PageController::class, 'showHome'])->name('home');
+
+            // route group
+            Route::controller(PageController::class)->group(function () {
+                Route::get("/", 'showHome')->name('home');
+                Route::get("/blog", 'showBlog')->name('blog');
+                Route::get("/user/{id}", 'showUser')->name('user');
+            });
+
+        ```
+        - Single Action Controller
+        ```php
+            php artisan make:controller TestingController --invokable
+            or
+            php artisan make:controller TestingController --i
+
+            class TestController extends Controller
+            {
+                public function __invok ()
+
+                {
+                    return view('test');
+
+                } 
+
+            }
+
+            Route::get('/test', TestingController::class);
+        ```
+        - myProject>php artisan route:list --except-vendor
+        - php artisan route:list --path=user
+### 14.Features of Laravel 11
+### 15.Database Migration
+- How to Work with Database
+    1. Create Database
+    1. Create Tables in Database(column Namw, Datatype)
+    1. Insert Initial Data in Tables
+    1. Code with Database
+#### Steps
+1. Create Database
+1. Create Database Migration
+    - (Create tables in database)
+1. Seeding
+    - (Insert Initial Data in Tables)
+    - php artisan make:migration create_students_table
+1. Create Model
+
+#### Mysql DataTypes
+1. CHAR(size)
+1. VARCHAR (size)
+1. BINARY(size)
+1. VARBINARY(size)
+1. TINYTEXT
+1. TEXT(size)
+1. MEDIUMTEXT
+1. LONGTEXT
+1. TINYBLOB
+1. BLOB(size)
+1. MEDIUMBLOB
+1. LONGBLOB
+1. ENUM(val1, val2, val3, ...)
+1. SET(vall, val2, val3,..)
+1. BIT(size) 1to64
+1. TINYINT(size) -128 to 127
+1. INT(size) -2147483648 to 2147483647
+1. INTEGER(size)
+1. SMALLINT(size) -32768 to 32767
+1. MEDIUMINT(size) -8388608 to 8383607
+1. BIGINT(size) -9223372036854775808 to 1. 9223372036854775807
+1. BOOL
+1. BOOLEAN 0/1
+1. FLOAT(p)
+1. DOUBLE(size, d) 255.568
+1. DECIMAL(size, d) size = 60, d = 30
+1. DEC(size,d)
+
+#### [Laravel Migration Avilable Datatypes Docs](https://laravel.com/docs/11.x/migrations#available-column-types)
+#### PHP Artisan Migration Commands
+1. php artisan make:migration
+1. php artisan make:migration create_students_table / tablename
+1. php artisan migrate
+1. php artisan migrate:status
+1. php artisan migrate:rollback
+1. php artisan migrate:reset
+1. php artisan migrate:refresh
+1. php artisan migrate:fresh
+1. php artisan make:model Task -m
+
+### 16.Migration Modifiers and constraints
+- Types of Modifications
+    - Column Modifications
+        1. Add New Column
+        1. Rename Column
+        1. Delete Column
+        1. Change Column Order
+        1. Change Datatype or Size of Column
+    - Table Modifications
+        1. Rename Table
+        1. Delete Table
+#### Laravel:Modify Column with Migration
+```php
+$table->renameColumn(‘from’, 'to'); 
+
+MySQL <8.0.3
+MariaDB < 10.5.2
+
+$table->dropColumn('city');
+$table->dropColumn(['city’, ‘avatar’, 'location']);
+$table->string('name', 50)->change();
+$table->integer('votes')->unsigned()->default(1)->comment('my comment')->change();
+
+Change Column Order
+$table after('password’, function (Blueprint $table) {
+    $table->string('address');
+    $table->string('city');
+});
+```
+### MYSQL Constraints with Migration
+* NOT NULL
+* UNIQUE
+* DEFAULT
+* PRIMARY KEY
+* FOREIGN KEY
+* CHECK
+```php
+    Stable->string(‘email')->nullable();
+    Stable->string(‘'email')->unique();
+    Stable->unique('email’);
+    Stable->string('city')->default('Agra');
+    Stable->primary('user_id');
+    Stable->foreign('user_id')->references('id')->on('users');
+    DB::statement('ALTER TABLE users ADD CONSTRAINT age CHECK (age > 18);');
+```
+|Modifier|Description|
+|---|---|
+|->after('column’)| Place the column "after" another column (MySQL).|
+|->autoIncrement()| Set INTEGER columns as auto-incrementing (primary key).|
+|->comment('my comment’)| Add a comment to a column (MySQL/PostgreSQL).|
+|->first()| Place the column "first" in the table (MySQL).|
+|->from(Sinteger)| Set the starting value of an auto-incrementing field (MySQL / PostgreSQL).|
+|->invisible()| Make the column "invisible" to SELECT * queries (MySQL).|
+|->unsigned()| Set INTEGER columns as UNSIGNED (MySQL).|
+|->useCurrent()| Set TIMESTAMP columns to use CURRENT_TIMESTAMP as default value.|
+|->useCurrentOnUpdate()| Set TIMESTAMP columns to use CURRENT_TIMESTAMP when a record is updated (MySQL).|
+
+### 17.Migration Primary & Foreign Key
+```php
+// create primary key
+$table->primary('Cid');
+// create foreign key
+$table->foreign('city')->references('Cid')->on('City');
+```
+- Foreign Key with Cascade
+```php
+Stable->foreign('City_id')->references('Cid')->on('City’)
+    ->onUpdate('cascade')
+    ->onDelete('cascade’);
+
+cascadeOnUpdate();
+cascadeOnDelete();
+restrictOnUpdate();
+restrictOnDelete();
+nullOnDelete();
+```
+- 3way to make foreign key
+```php
+$table->foreign('stu_id')->references('id')->on('students'); 
+$table->foreignId('stu_id')->constrained (‘students’); 
+$table->unsignedBiginteger('student_id'); 
+$table->foreignId('student_id')->constratined();
+```
+- Drop key Constraints
+- php artisan make:migration update_library_table --table=libraries
+- php artisan migrate:refresh
+```php
+$table->dropPrimary('users_id_primary');
+$table->dropUnique('users_email_unique');
+$table->dropForeign('posts_user_id_foreign');
+$table->dropForeign(['user_id']);
 ```
